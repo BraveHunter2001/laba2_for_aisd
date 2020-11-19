@@ -75,7 +75,7 @@ Set& Set::operator= (const Set& B)
 		char* dst(A), * src(B.A); 
 		n = B.n;
 		while (*dst++ = *src++);
-		S = 'A' + cnt++;
+		
 	}
 	return *this;
 }
@@ -86,7 +86,7 @@ Set& Set::operator= (Set&& B)
 	{
 		n = B.n;
 		A = B.A;
-		S = 'A' + cnt;
+		
 		B.A = nullptr;
 	}
 	return *this;
