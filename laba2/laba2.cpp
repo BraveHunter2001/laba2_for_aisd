@@ -1,0 +1,39 @@
+﻿#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+#include "Set.h"
+
+int Set::N = 26, Set::cnt = 0;
+const int q0 = 100000;
+
+int main()
+{
+    srand(time(nullptr));
+
+    Set A('A'),
+        B('B'),
+        C('C'),
+        D('D'),
+        E;
+    clock_t begin = clock();
+
+    for (int i = 0; i < q0; i++)
+    {
+        E = (A | B) & (C & ~D);
+    }
+    
+    clock_t end = clock();
+
+    E.Show();
+
+    cout << "Middle power =" <<
+        (A.power() + B.power() + C.power() + E.power()) / 5 <<endl<<
+        "Time=" << end - begin << "/" << q0 << endl;
+    cin.get();
+    //
+    return 0;
+}
+
