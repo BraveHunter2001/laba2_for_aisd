@@ -6,11 +6,12 @@ using namespace std;
 
 #include "Set.h"
 
-int Set::N = 26, Set::cnt = 0;
+int Set::N = 32, Set::cnt = 0;
 const int q0 = 100000;
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     srand(time(nullptr));
 
     Set A('A'),

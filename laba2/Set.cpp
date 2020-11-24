@@ -49,7 +49,7 @@ Set Set::operator | (const Set & B) const
 Set Set::operator~ () const
 {
 	Set C;
-	for (char c = 'A'; c <= 'Z'; c++)
+	for (char c = 'À'; c <= 'ß'; c++)
 	{
 		bool f = true;
 		for (int j = 0; j < n; j++)
@@ -106,7 +106,7 @@ Set::Set(char) : n(0), S('A' + cnt++), A(new char[N + 1])
 	
 	for (int i = 0; i < N; i++)
 		if (rand() % 2) 
-			A[n++] = i + 'A';
+			A[n++] = i + 'À';
 	A[n] = 0;
 	(*this).Show();
 }
@@ -140,7 +140,7 @@ void Set::Generator(int len,  char* arr)
 	uni[N] = 0;
 	for (int i = 0; i < N; i++)
 	{
-		uni[i] = 'A' + i;
+		uni[i] = 'À' + i;
 	}
 
 	for (int i = 0; i < len; i++)
