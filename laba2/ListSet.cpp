@@ -8,7 +8,7 @@ Set::Set(char) : n(0), S('A' + cnt++), A(new ST(0, nullptr))
 
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
-			A = new ST(i + 'À', A);
+			A = new ST(i + 'Ð', A);
 	(*this).Show();
 }
 
@@ -30,7 +30,7 @@ Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 bool Set::isInSet(unsigned char item) const{
 	ST* x = A;
 	while (x) {
-		if (x->letter == item) {
+		if ((x->letter == item) && x->letter != 0) {
 			return true;
 		}
 		x = x->next;
@@ -42,7 +42,6 @@ bool Set::isInSet(unsigned char item) const{
 Set& Set::operator |=(const Set& B)
 {
 	Set D(B);
-	n = 0;
 	while (D.A) {
 		if (!isInSet(D.A->letter)) {
 			A = new ST(D.A->letter, A);
@@ -85,9 +84,11 @@ Set Set::operator | (const Set& B) const
 Set Set::operator~ () const
 {
 	Set C;
-	for (char c = 'À'; c <= 'ß'; c++)
-		if (!isInSet(c))
+	for (char c = 'Ð'; c <= 'Ð¯'; c++)
+		if (!isInSet(c)) {
 			C.A = new ST(c, C.A);
+			C.n++;
+		}
 	return C;
 }
 
@@ -135,7 +136,7 @@ void Set::Generator(int len, ST* set) {
 	uni[N] = 0;
 	for (int i = 0; i < N; i++)
 	{
-		uni[i] = 'À' + i;
+		uni[i] = 'Ð' + i;
 	}
 
 	for (int i = 0; i < len; i++)
