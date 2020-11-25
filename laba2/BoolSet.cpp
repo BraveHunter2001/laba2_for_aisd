@@ -14,7 +14,7 @@ Set& Set::operator &=(const Set& B)
 	{
 		A[i] = C.A[i] * B.A[i];
 	}
-	
+	CalcPower();
 	return *this;
 }
 
@@ -31,7 +31,7 @@ Set& Set::operator |=(const Set& B)
 	{
 		A[i] += B.A[i];
 	}
-	
+	CalcPower();
 	return *this;
 }
 
@@ -48,6 +48,7 @@ Set Set::operator~ () const
 	{
 		C.A[i] = !A[i];
 	}
+	C.CalcPower();
 	return C;
 }
 
@@ -61,6 +62,7 @@ Set& Set::operator= (const Set& B)
 		}
 
 	}
+	CalcPower();
 	return *this;
 }
 
@@ -131,8 +133,19 @@ void Set::Show()
 		if (A[i])
 			std::cout << (char)('À' + i);
 	}
-	std::cout << "]" << '\n';
+	std::cout << "]" <<" Power: "<<n<<  '\n';
 
+}
+
+void Set::CalcPower()
+{
+	int tempCount = 0;
+	for (size_t i = 0; i < N; i++)
+	{
+		if (A[i])
+			tempCount++;
+	}
+	n = tempCount;
 }
 
 void Set::Generator(int len, bool* arr)

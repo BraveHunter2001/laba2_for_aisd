@@ -7,6 +7,7 @@ private:
 	char S;
 	bool* A;
 	void Generator(int len, bool* arr);
+	void CalcPower();
 
 public:
 	Set operator| (const Set&) const;
