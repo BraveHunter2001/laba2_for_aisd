@@ -34,7 +34,7 @@ int main()
         (A.power() + B.power() + C.power() + E.power()) / 5 <<endl<<
         "Time=" << end - begin << "/" << q0 << endl;
     cin.get();
-    
+    //for test
     return 0;
 }
 
