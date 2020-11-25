@@ -21,6 +21,9 @@
     <ClCompile Include="ListSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WeAreTwoOVOSHA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListSet.h">
