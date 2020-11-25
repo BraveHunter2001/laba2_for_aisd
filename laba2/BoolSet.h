@@ -14,8 +14,6 @@ public:
 	Set operator~ () const;
 	Set& operator= (const Set&);
 	Set& operator= (Set&& B);
-
-	// this shit that our grandpa didn't declare.
 	Set& operator &= (const Set&);
 	Set& operator |= (const Set&);
 
