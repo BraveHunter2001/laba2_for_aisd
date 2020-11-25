@@ -5,7 +5,6 @@ Set::Set() : n(0), S('A' + cnt++), A(new ST(0, nullptr)) {};
 
 Set::Set(char) : n(0), S('A' + cnt++), A(new ST(0, nullptr))
 {
-
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
 			A = new ST(i + 'À', A);
@@ -41,13 +40,11 @@ bool Set::isInSet(unsigned char item) const {
 
 Set& Set::operator |=(const Set& B)
 {
-	Set D(B);
-	while (D.A) {
-		if (!isInSet(D.A->letter)) {
-			A = new ST(D.A->letter, A);
+	for (ST* z = B.A; z; z = z->next) {
+		if (!isInSet(z->letter)) {
+			A = new ST(z->letter, A);
 			n++;
 		}
-		D.A = D.A->next;
 	}
 	return *this;
 }
@@ -60,16 +57,15 @@ Set Set::operator& (const Set& B)const
 
 Set& Set::operator &=(const Set& B)
 {
-	Set D(B), C(*this);
+	Set C(*this);
 	delete A;
 	A = nullptr;
 	n = 0;
-	while (D.A) {
-		if (C.isInSet(D.A->letter)) {
-			A = new ST(D.A->letter, A);
+	for (ST* z = B.A; z; z = z -> next) {
+		if (C.isInSet(z->letter)) {
+			A = new ST(z->letter, A);
 			n++;
 		}
-		D.A = D.A->next;
 	}
 
 	return *this;
@@ -94,12 +90,16 @@ Set Set::operator~ () const
 
 Set& Set::operator= (const Set& B)
 {
-	ST* src(B.A);
-	while (src->letter) {
-		A = new ST(src->letter, A);
-		src = src->next;
+	if (this != &B) {
+		ST* src(B.A);
+		delete A;
+		A = nullptr;
+		while (src->letter) {
+			A = new ST(src->letter, A);
+			src = src->next;
+		}
+		(*this).n = B.n;
 	}
-	(*this).n = B.n;
 	return *this;
 }
 
@@ -107,6 +107,7 @@ Set& Set::operator= (Set&& B) noexcept
 {
 	if (this != &B)
 	{
+		delete A;
 		n = B.n;
 		A = B.A;
 
