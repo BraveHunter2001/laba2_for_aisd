@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="laba2.cpp" />
     <ClCompile Include="ListSet.cpp" />
-    <ClCompile Include="WeAreTwoOVOSHA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListSet.h" />
