@@ -1,40 +1,27 @@
 ﻿#include <iostream>
+#include <Windows.h>
 #include <string.h>
-#include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
+#include "ListSet.h"
+
 using namespace std;
 
-#include "BoolSet.h"
-
 int Set::N = 32, Set::cnt = 0;
-const int q0 = 100000;
+const long q0 = 100000;
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
     srand(time(nullptr));
-
-    Set A('A'),
-        B('B'),
-        C('C'),
-        D('D'),
-        E;
-    clock_t begin = clock();
-
-    for (int i = 0; i < q0; i++)
-    {
-        E = (A | B) & (C & ~D);
+    for (int i = 0; i < 12; ++i) {
+        cout << "Power = " << i << '\n';
+        Set A(i), B(i), C(i), D(i), E;
+        E = A & ~(B | C | D);
+        E.Show();
+        cout << "Power of result = " << E.power() << '\n';
     }
-    
-    clock_t end = clock();
-
-    E.Show();
-
-    cout << "Middle power =" <<
-        (A.power() + B.power() + C.power() + E.power()) / 5 <<endl<<
-        "Time=" << end - begin << "/" << q0 << endl;
-    cin.get();
-    
     return 0;
 }
-
