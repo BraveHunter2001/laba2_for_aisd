@@ -24,9 +24,10 @@ public:
 	Set operator~ () const;
 	Set& operator= (const Set&);
 	Set& operator= (Set&& B) noexcept;
+
 	Set& operator &= (const Set&);
 	Set& operator |= (const Set&);
-	
+
 	bool isInSet(unsigned char) const;
 	void Show();
 	int power() { return n; }

@@ -1,14 +1,14 @@
 #include "ListSet.h"
 #include <iostream>
 
-Set::Set() : n(0), S('A' + cnt++), A(new ST(0, nullptr)) {} ;
+Set::Set() : n(0), S('A' + cnt++), A(new ST(0, nullptr)) {};
 
 Set::Set(char) : n(0), S('A' + cnt++), A(new ST(0, nullptr))
 {
 
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
-			A = new ST(i + '–ê', A);
+			A = new ST(i + '¿', A);
 	(*this).Show();
 }
 
@@ -27,7 +27,7 @@ Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 	B.A = nullptr;
 }
 
-bool Set::isInSet(unsigned char item) const{
+bool Set::isInSet(unsigned char item) const {
 	ST* x = A;
 	while (x) {
 		if ((x->letter == item) && x->letter != 0) {
@@ -84,7 +84,7 @@ Set Set::operator | (const Set& B) const
 Set Set::operator~ () const
 {
 	Set C;
-	for (char c = '–ê'; c <= '–Ø'; c++)
+	for (char c = '¿'; c <= 'ﬂ'; c++)
 		if (!isInSet(c)) {
 			C.A = new ST(c, C.A);
 			C.n++;
@@ -136,7 +136,7 @@ void Set::Generator(int len, ST* set) {
 	uni[N] = 0;
 	for (int i = 0; i < N; i++)
 	{
-		uni[i] = '–ê' + i;
+		uni[i] = '¿' + i;
 	}
 
 	for (int i = 0; i < len; i++)

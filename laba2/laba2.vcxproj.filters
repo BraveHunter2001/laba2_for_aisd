@@ -18,12 +18,12 @@
     <ClCompile Include="laba2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoolSet.cpp">
+    <ClCompile Include="ListSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoolSet.h">
+    <ClInclude Include="ListSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
