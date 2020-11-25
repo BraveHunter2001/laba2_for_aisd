@@ -4,7 +4,7 @@
 #include <time.h>
 using namespace std;
 
-#include "Set.h"
+#include "BoolSet.h"
 
 int Set::N = 32, Set::cnt = 0;
 const int q0 = 100000;
