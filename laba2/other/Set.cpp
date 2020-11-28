@@ -157,4 +157,6 @@ void Set::Generator(int len,  char* arr)
 		arr[i] = uni[i];
 	}
 	arr[len] = 0;
+
+	delete[] uni;
 }

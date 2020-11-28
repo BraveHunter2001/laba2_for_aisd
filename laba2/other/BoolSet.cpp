@@ -173,5 +173,5 @@ void Set::Generator(int len, bool* arr)
 		arr[uni[i] -'À'] = true;
 	}
 
-
+	delete[] uni;
 }

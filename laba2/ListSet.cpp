@@ -155,4 +155,6 @@ void Set::Generator(int len, ST* set) {
 	{
 		A = new ST(uni[i], A);
 	}
+
+	delete[] uni;
 }

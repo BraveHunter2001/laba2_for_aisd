@@ -18,15 +18,16 @@ int main()
 
     srand(time(nullptr));
     for (int i = 0; i < 12; ++i) {
-        cout << "Power = " << i << '\n';
-        Set A(i), B(i), C(i), D(i), E;
-        clock_t begin = clock();
+        
         for (long repeat = 0; repeat < q0; repeat++)
+        {
+            cout << "Power = " << i << '\n';
+            Set A(i), B(i), C(i), D(i), E;
             E = A & ~(B | C | D);
-        clock_t end = clock();
-        E.Show();
-        cout << "Power of result = " << E.power() << '\n';
-        cout << "Time = " << end - begin << endl;
+            E.Show();
+            cout << "Power of result = " << E.power() << '\n';
+        }
+        
     }
     return 0;
 }
