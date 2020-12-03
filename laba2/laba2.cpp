@@ -4,7 +4,7 @@
 #include <time.h>
 #include <ctime>
 #include <stdlib.h>
-#include "ListSet.h"
+#include "BoolSet.h"
 
 using namespace std;
 
@@ -17,17 +17,14 @@ int main()
     SetConsoleOutputCP(1251);
 
     srand(time(nullptr));
-    for (int i = 0; i < 12; ++i) {
+    
         
-        for (long repeat = 0; repeat < q0; repeat++)
+        for (long repeat = 0; repeat < 2; repeat++)
         {
-            cout << "Power = " << i << '\n';
-            Set A(i), B(i), C(i), D(i), E;
+            Set A('s'), B('s'), C('s'), D('s'), E;
             E = A & ~(B | C | D);
-            E.Show();
+            cout << E;
             cout << "Power of result = " << E.power() << '\n';
         }
-        
-    }
     return 0;
 }

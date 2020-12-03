@@ -78,6 +78,12 @@ Set& Set::operator= (Set&& B)
 	return *this;
 }
 
+std::ostream& operator<< (std::ostream& os, Set& set) {
+	set.Show();
+
+	return os;
+}
+
 #pragma endregion
 
 

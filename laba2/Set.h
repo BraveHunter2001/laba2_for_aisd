@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 class Set
 {
 	private:
@@ -15,6 +16,7 @@ class Set
 		Set& operator= (Set&& B);
 		Set& operator &= (const Set&);
 		Set& operator |= (const Set&);
+		friend std::ostream& operator<< (std::ostream&, Set&);
 
 		void Show();
 		int power() { return n; }

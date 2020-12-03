@@ -1,4 +1,7 @@
 #pragma once
+
+#include <iostream>
+
 class ST {
 private:
 	unsigned char letter;
@@ -27,6 +30,8 @@ public:
 
 	Set& operator &= (const Set&);
 	Set& operator |= (const Set&);
+
+	friend std::ostream& operator<< (std::ostream&, Set&);
 
 	bool isInSet(unsigned char) const;
 	void Show();

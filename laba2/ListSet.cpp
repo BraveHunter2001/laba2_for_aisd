@@ -8,7 +8,7 @@ Set::Set(char) : n(0), S('A' + cnt++), A(new ST(0, nullptr))
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
 			A = new ST(i + 'À', A);
-	(*this).Show();
+	std::cout << *this;
 }
 
 Set::Set(const Set& B) : S('A' + cnt++), A(new ST(0, nullptr))
@@ -157,4 +157,10 @@ void Set::Generator(int len, ST* set) {
 	}
 
 	delete[] uni;
+}
+
+std::ostream& operator<< (std::ostream & os, Set& set) {
+	set.Show();
+
+	return os;
 }
