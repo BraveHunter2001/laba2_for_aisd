@@ -164,3 +164,7 @@ std::ostream& operator<< (std::ostream & os, Set& set) {
 
 	return os;
 }
+void Set::ZeroingCounter()
+{
+	cnt = 0;
+}

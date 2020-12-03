@@ -4,7 +4,7 @@
 #include <time.h>
 #include <ctime>
 #include <stdlib.h>
-#include "BoolSet.h"
+#include "MachineWordSet.h"
 
 using namespace std;
 
@@ -19,12 +19,14 @@ int main()
     srand(time(nullptr));
     
         
-        for (long repeat = 0; repeat < 2; repeat++)
+        for (long repeat = 0; repeat < 100000; repeat++)
         {
-            Set A('s'), B('s'), C('s'), D('s'), E;
+            Set A(15), B(15), C(15), D(15), E;
             E = A & ~(B | C | D);
             cout << E;
             cout << "Power of result = " << E.power() << '\n';
+            Set::ZeroingCounter();
         }
+
     return 0;
 }

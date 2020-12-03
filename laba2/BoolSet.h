@@ -19,7 +19,7 @@ public:
 	Set& operator &= (const Set&);
 	Set& operator |= (const Set&);
 	friend std::ostream& operator<< (std::ostream&, Set&);
-
+	static void ZeroingCounter();
 	void Show();
 	int power() { return n; }
 

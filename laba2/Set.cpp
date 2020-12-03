@@ -166,3 +166,7 @@ void Set::Generator(int len,  char* arr)
 
 	delete[] uni;
 }
+void Set::ZeroingCounter()
+{
+	cnt = 0;
+}

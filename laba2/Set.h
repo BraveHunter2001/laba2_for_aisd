@@ -26,6 +26,7 @@ class Set
 		Set(const Set&);
 		Set(Set&& B);
 		Set(int len);
-		
+		static void ZeroingCounter();
+
 		~Set() { delete[] A; }
 };

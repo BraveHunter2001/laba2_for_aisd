@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoolSet.cpp" />
     <ClCompile Include="laba2.cpp" />
+    <ClCompile Include="MachineWordSet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoolSet.h" />
+    <ClInclude Include="MachineWordSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

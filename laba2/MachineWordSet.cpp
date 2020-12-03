@@ -1,5 +1,4 @@
-#include "BoolSet.h"
-
+#include "MachineWordSet.h"
 #include <iostream>
 
 
@@ -7,12 +6,9 @@
 Set& Set::operator &=(const Set& B)
 {
 	Set C(*this);
-	
+
 	n = 0;
-	for (size_t i = 0; i < C.N; i++)
-	{
-		A[i] = C.A[i] * B.A[i];
-	}
+	A = A & B.A;
 	CalcPower();
 	return *this;
 }
@@ -26,10 +22,7 @@ Set Set::operator& (const Set& B)const
 Set& Set::operator |=(const Set& B)
 {
 
-	for (int i = 0; i < B.N; i++)
-	{
-		A[i] += B.A[i];
-	}
+	A = A | B.A;
 	CalcPower();
 	return *this;
 }
@@ -43,10 +36,7 @@ Set Set::operator | (const Set& B) const
 Set Set::operator~ () const
 {
 	Set C;
-	for (size_t i = 0; i < N; i++)
-	{
-		C.A[i] = !A[i];
-	}
+	C.A = ~A;
 	C.CalcPower();
 	return C;
 }
@@ -55,11 +45,7 @@ Set& Set::operator= (const Set& B)
 {
 	if (this != &B)
 	{
-		for (size_t i = 0; i < N; i++)
-		{
-			A[i] = B.A[i];
-		}
-
+		A = B.A;
 	}
 	CalcPower();
 	return *this;
@@ -72,7 +58,7 @@ Set& Set::operator= (Set&& B)
 		n = B.n;
 		A = B.A;
 
-		B.A = nullptr;
+		B.A = 0;
 	}
 	return *this;
 }
@@ -87,45 +73,34 @@ std::ostream& operator<< (std::ostream& os, Set& set) {
 
 
 
-Set::Set() : n(0), S('A' + cnt++), A(new bool[N])
+Set::Set() : n(0), S('A' + cnt++), A(0)
 {
-	for (size_t i = 0; i < N; i++)
-	{
-		A[i] = false;
-	}
+	
 }
 
-Set::Set(char) : n(0), S('A' + cnt++), A(new bool[N])
+Set::Set(char) : n(0), S('A' + cnt++), A(0)
 {
 
-	for (int i = 0; i < N; i++)
-		if (rand() % 2)
-		{
-			A[i] = true;
-			n++;
-		}
-		else
-			A[i] = false;
+	A = rand() % 0x3FF;
+	CalcPower();
 	(*this).Show();
 }
 
-Set::Set(const Set& B) : S('A' + cnt++), A(new bool[N])
+
+Set::Set(const Set& B) : S('A' + cnt++)
 {
-	for (size_t i = 0; i < N; i++)
-	{
-		A[i] = B.A[i];
-	}
+	A = B.A;
 	(*this).n = B.n;
 }
 
 Set::Set(Set&& B) : S('A' + cnt++), n(B.n), A(B.A)
 {
-	B.A = nullptr;
+	B.A = 0;
 }
 
-Set::Set(int len) : n(len), S('A' + cnt++), A(new bool[N])
+Set::Set(int len) : n(len), S('A' + cnt++), A(0)
 {
-	Generator(len, A);
+	Generator(len, &A);
 	(*this).Show();
 }
 
@@ -133,12 +108,13 @@ void Set::Show()
 {
 	std::cout << S << "=[";
 
-	for (size_t i = 0; i < N; i++)
-	{
-		if (A[i])
-			std::cout << (char)('À' + i);
+	int one = 1;
+	for (size_t i = 0; i < N; ++i) {
+		if (A & one << i) {
+			std::cout << (unsigned char)(i + SHIFT);
+		}
 	}
-	std::cout << "]" <<" Power: "<<n<<  '\n';
+	std::cout << "]" << " Power: " << n << '\n';
 
 }
 
@@ -147,13 +123,13 @@ void Set::CalcPower()
 	int tempCount = 0;
 	for (size_t i = 0; i < N; i++)
 	{
-		if (A[i])
+		if (A & 1 << i)
 			tempCount++;
 	}
 	n = tempCount;
 }
 
-void Set::Generator(int len, bool* arr)
+void Set::Generator(int len, int* arr)
 {
 	char* uni = new char[N + 1];
 	uni[N] = 0;
@@ -170,16 +146,15 @@ void Set::Generator(int len, bool* arr)
 			std::swap(uni[p + i], uni[i]);
 		}
 	}
-	for (size_t i = 0; i < N; i++)
-	{
-		arr[i] = 0;
-	}
+	
 	for (size_t i = 0; i < len; ++i) {
-		arr[uni[i] -'À'] = true;
+		*arr = *arr | 1 << (uni[i] - SHIFT);
 	}
+
 
 	delete[] uni;
 }
+
 void Set::ZeroingCounter()
 {
 	cnt = 0;
