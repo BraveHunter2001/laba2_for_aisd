@@ -10,9 +10,9 @@ bool Set::IsInSet(char element) const {
 	return false;
 }
 // конструктор множества
-Set::Set(int _power) :
+Set::Set(int len) :
 	S('A' + cnt++),
-	n(_power),
+	n(len),
 	A(nullptr)
 {
 	Generator(n, A);
@@ -27,104 +27,104 @@ Set::Set() :
 	// std::cout << "CREATED " << *this << std::endl;
 }
 // конструктор копии
-Set::Set(const Set& S) :
+Set::Set(const Set& B) :
 	S('A' + cnt++),
-	n(S.n),
+	n(B.n),
 	A(nullptr)
 {
-	for (ST* p = S.A; p; p = p->next) {
+	for (ST* p = B.A; p; p = p->next) {
 		A = new ST(p->letter, A);
 	}
-	// std::cout << "CREATED " << *this << " FROM " << S.tag << std::endl;
+	// std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
 }
 // конструктор копирования с переносом
-Set::Set(Set&& S) noexcept :
+Set::Set(Set&& B) noexcept :
 	S('A' + cnt++),
-	n(S.n),
-	A(S.A)
+	n(B.n),
+	A(B.A)
 {
-	S.A = nullptr;
-	// std::cout << "BECOMED " << *this << " FROM " << S.tag << std::endl;
+	B.A = nullptr;
+	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 // деструктор множества
 Set::~Set() {
-		// std::cout << "DELETED " << *this << std::endl;
-		A->ST::~ST();
+	// std::cout << "DELETED " << *this << std::endl;
+	A->ST::~ST();
 }
 // присваивание
-Set& Set::operator=(const Set& S) {
-	if (this != &S) {
-		// std::cout << "DELETED LIST-SET {" << set << "} FROM " << tag << " BUT NOT OBJECT" << std::endl;
+Set& Set::operator=(const Set& B) {
+	if (this != &B) {
+		// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 		delete A;
 		A = nullptr;
-		n = S.n;
-		for (ST* p = S.A; p; p = p->next) {
+		n = B.n;
+		for (ST* p = B.A; p; p = p->next) {
 			A = new ST(p->letter, A);
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " FROM " << S.tag << std::endl;
+	// std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 // присваивание с переносом
-Set& Set::operator=(Set&& S) noexcept {
-	if (this != &S) {
-		// std::cout << "DELETED LIST-SET {" << set << "} FROM " << tag << " BUT NOT OBJECT" << std::endl;
+Set& Set::operator=(Set&& B) noexcept {
+	if (this != &B) {
+		// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 		delete A;
-		n = S.n;
-		A = S.A;
-		S.A = nullptr;
+		n = B.n;
+		A = B.A;
+		B.A = nullptr;
 	}
-	// std::cout << "BECOMED " << *this << " FROM " << S.tag << std::endl;
+	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 // объединение с присваиванием
-Set& Set:: operator|=(const Set& rS) {
-	for (ST* p = rS.A; p; p = p->next) {
+Set& Set:: operator|=(const Set& B) {
+	for (ST* p = B.A; p; p = p->next) {
 		if (!IsInSet(p->letter)) {
 			A = new ST(p->letter, A);
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << tag << " | " << rS.tag << std::endl;
+	// std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
 	return *this;
 }
 // объединение
-Set Set:: operator|(const Set& rS) const {
-	// std::cout << "CALCULATION " << tag << " | " << rS.tag << std::endl;
-	Set lS(*this);
-	return (lS |= rS);
+Set Set:: operator|(const Set& B) const {
+	// std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
+	Set C(*this);
+	return (C |= B);
 }
 // пересечение с присваиванием
-Set& Set::operator&=(const Set& rS) {
-	Set lS(*this);
-	// std::cout << "DELETED LIST-SET {" << set << "} FROM " << tag << " BUT NOT OBJECT" << std::endl;
+Set& Set::operator&=(const Set& B) {
+	Set C(*this);
+	// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 	delete A;
 	A = nullptr;
 	n = 0;
-	for (ST* p = rS.A; p; p = p->next) {
-		if (lS.IsInSet(p->letter)) {
+	for (ST* p = B.A; p; p = p->next) {
+		if (C.IsInSet(p->letter)) {
 			A = new ST(p->letter, A);
 			++n;
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << lS.tag << " & " << rS.tag << std::endl;
+	// std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
 	return *this;
 }
 // пересечение
-Set Set::operator&(const Set& rS) const {
-	// std::cout << "CALCULATION " << tag << " & " << rS.tag << std::endl;
-	Set lS(*this);
-	return (lS &= rS);
+Set Set::operator&(const Set& B) const {
+	// std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
+	Set C(*this);
+	return (C &= B);
 }
 // дополнение до универсума
 Set Set::operator~() const {
-	Set S;
+	Set C;
 	for (char c = 'A'; c <= 'Z'; ++c) {
 		if (!IsInSet(c)) {
-			S.A = new ST(c, S.A);
+			C.A = new ST(c, C.A);
 		}
 	}
-	// std::cout << "RECEIVED " << S << " = ~" << tag << std::endl;
-	return S;
+	// std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
+	return C;
 }
 
 std::ostream& operator<<(std::ostream& os, Set& S) {
@@ -149,7 +149,7 @@ void Set::Generator(int len, ST* set) {
 		}
 	}
 
-	A = new ST(0, A);
+	if (len) A = new ST(0, A);
 
 	for (int i = 0; i < len; i++)
 	{
@@ -160,11 +160,14 @@ void Set::Generator(int len, ST* set) {
 }
 
 void Set::Show() {
-	std::cout << S << "=[";
-	ST* T = A;
-	while (T) {
-		std::cout << T->letter;
-		T = T->next;
+	std::cout << S << "[" << n << "] = {";
+	if (A) {
+		ST* T = A;
+		while (T) {
+			std::cout << T->letter;
+			T = T->next;
+		}
 	}
-	std::cout << ']' << '\n';
+	else std::cout << "<EMPTY>";
+	std::cout << '}';
 }

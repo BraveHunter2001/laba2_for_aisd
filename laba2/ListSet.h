@@ -42,5 +42,5 @@ public:
 	Set(const Set&);
 	Set(Set&& B) noexcept;
 	Set(int);
-	~Set() { delete A; }
+	~Set();
 };

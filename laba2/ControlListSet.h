@@ -41,7 +41,7 @@ public:
 	Set operator~() const; // дополнение до универсума
 	Set& operator=(const Set&); // присваивание
 	Set& operator=(Set&&) noexcept; // присваивание с переносом
-	int GetPower() const { return n; } // получение мощности
+	int power() const { return n; } // получение мощности
 	bool IsInSet(char) const; // проверка наличия элемента в множестве;
 	friend std::ostream& operator<<(std::ostream&, Set&); // перегрузка оператора вывода
 	void Show();
@@ -58,7 +58,7 @@ static void MemoryOutput() {
 		<< std::endl;
 	for (int i = 0; i < ST::max_mup; ++i) {
 		if (!(i % 100) && i) std::cout << std::endl;
-		std::cout << ST::list_memory[i].element;
+		std::cout << ST::list_memory[i].letter;
 	}
 	std::cout << std::endl;
 }

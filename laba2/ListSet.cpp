@@ -1,17 +1,19 @@
 #include "ListSet.h"
 #include <iostream>
 
-Set::Set() : n(0), S('A' + cnt++), A(new ST(0, nullptr)) {};
+Set::Set() : n(0), S('A' + cnt++), A(nullptr) {
+	// std::cout << "CREATED " << *this << std::endl;
+}
 
-Set::Set(char) : n(0), S('A' + cnt++), A(new ST(0, nullptr))
+Set::Set(char) : n(0), S('A' + cnt++), A(nullptr)
 {
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
 			A = new ST(i + 'À', A);
-	std::cout << *this;
+	// std::cout << "CREATED " << *this << std::endl;
 }
 
-Set::Set(const Set& B) : S('A' + cnt++), A(new ST(0, nullptr))
+Set::Set(const Set& B) : S('A' + cnt++), A(nullptr)
 {
 	ST* src(B.A);
 	while (src) {
@@ -19,11 +21,13 @@ Set::Set(const Set& B) : S('A' + cnt++), A(new ST(0, nullptr))
 		src = src->next;
 	}
 	(*this).n = B.n;
+	// std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
 }
 
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
+	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 
 bool Set::isInSet(unsigned char item) const {
@@ -46,11 +50,13 @@ Set& Set::operator |=(const Set& B)
 			n++;
 		}
 	}
+	// std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator& (const Set& B)const
 {
+	// std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
 	Set C(*this);
 	return (C &= B);
 }
@@ -67,12 +73,13 @@ Set& Set::operator &=(const Set& B)
 			n++;
 		}
 	}
-
+	// std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator | (const Set& B) const
 {
+	// std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
 	Set C(*this);
 	return (C |= B);
 }
@@ -85,6 +92,7 @@ Set Set::operator~ () const
 			C.A = new ST(c, C.A);
 			C.n++;
 		}
+	// std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
 	return C;
 }
 
@@ -100,6 +108,7 @@ Set& Set::operator= (const Set& B)
 		}
 		(*this).n = B.n;
 	}
+	// std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
@@ -113,22 +122,26 @@ Set& Set::operator= (Set&& B) noexcept
 
 		B.A = nullptr;
 	}
+	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
 Set::Set(int len) : n(len), S('A' + cnt++) {
 	Generator(len, A);
-	(*this).Show();
+	// std::cout << "CREATED " << *this << std::endl;
 }
 
 void Set::Show() {
-	std::cout << S << "=[";
-	ST* T = A;
-	while (T) {
-		std::cout << T->letter;
-		T = T->next;
+	std::cout << S << "[" << n << "] = {";
+	if (A != nullptr) {
+		ST* T = A;
+		while (T) {
+			std::cout << T->letter;
+			T = T->next;
+		}
 	}
-	std::cout << ']' << '\n';
+	else std::cout << "<EMPTY>";
+	std::cout << '}';
 
 }
 
@@ -168,3 +181,6 @@ void Set::ZeroingCounter()
 {
 	cnt = 0;
 }
+
+Set::~Set() { //std::cout << "DELETED " << *this << std::endl;
+	delete A; }
