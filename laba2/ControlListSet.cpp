@@ -44,6 +44,7 @@ Set::Set(Set&& B) noexcept :
 	A(B.A)
 {
 	B.A = nullptr;
+	B.n = 0;
 	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 // деструктор множества
@@ -73,6 +74,7 @@ Set& Set::operator=(Set&& B) noexcept {
 		n = B.n;
 		A = B.A;
 		B.A = nullptr;
+		B.n = 0;
 	}
 	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;

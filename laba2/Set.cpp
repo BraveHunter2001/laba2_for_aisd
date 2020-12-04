@@ -94,6 +94,7 @@ Set& Set::operator= (Set&& B) noexcept
 		A = B.A;
 		
 		B.A = nullptr;
+		B.n = 0;
 	}
 	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
@@ -139,6 +140,7 @@ Set::Set(const Set& B) : S('A' + cnt++), A(new char[N + 1])
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
+	B.n = 0;
 	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 

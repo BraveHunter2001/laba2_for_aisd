@@ -27,6 +27,7 @@ Set::Set(const Set& B) : S('A' + cnt++), A(nullptr)
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
+	B.n = 0;
 	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 
@@ -121,6 +122,7 @@ Set& Set::operator= (Set&& B) noexcept
 		A = B.A;
 
 		B.A = nullptr;
+		B.n = 0;
 	}
 	std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
