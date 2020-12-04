@@ -10,8 +10,8 @@ using namespace std;
 // #include "Set.h"
 // #include "ListSet.h"
 // #include "ControlListSet.h"
-// #include "BoolSet.h"
-#include "MachineWordSet.h"
+#include "BoolSet.h"
+// #include "MachineWordSet.h"
 int
 Set::N = 32,
 Set::cnt = 0;
