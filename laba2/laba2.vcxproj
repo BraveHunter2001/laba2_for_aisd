@@ -140,10 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="laba2.cpp" />
-    <ClCompile Include="MachineWordSet.cpp" />
+    <ClCompile Include="ControlListSet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MachineWordSet.h" />
+    <ClInclude Include="ControlListSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
