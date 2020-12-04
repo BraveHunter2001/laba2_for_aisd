@@ -2,7 +2,7 @@
 #include <iostream>
 
 Set::Set() : n(0), S('A' + cnt++), A(nullptr) {
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 Set::Set(char) : n(0), S('A' + cnt++), A(nullptr)
@@ -10,7 +10,7 @@ Set::Set(char) : n(0), S('A' + cnt++), A(nullptr)
 	for (int i = 0; i < N; i++)
 		if (rand() % 2)
 			A = new ST(i + 'À', A);
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 Set::Set(const Set& B) : S('A' + cnt++), A(nullptr)
@@ -21,13 +21,13 @@ Set::Set(const Set& B) : S('A' + cnt++), A(nullptr)
 		src = src->next;
 	}
 	(*this).n = B.n;
-	// std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
 }
 
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 
 bool Set::isInSet(unsigned char item) const {
@@ -50,13 +50,13 @@ Set& Set::operator |=(const Set& B)
 			n++;
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator& (const Set& B)const
 {
-	// std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
+	 std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
 	Set C(*this);
 	return (C &= B);
 }
@@ -73,13 +73,13 @@ Set& Set::operator &=(const Set& B)
 			n++;
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator | (const Set& B) const
 {
-	// std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
+	 std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
 	Set C(*this);
 	return (C |= B);
 }
@@ -92,7 +92,7 @@ Set Set::operator~ () const
 			C.A = new ST(c, C.A);
 			C.n++;
 		}
-	// std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
+	 std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
 	return C;
 }
 
@@ -108,7 +108,7 @@ Set& Set::operator= (const Set& B)
 		}
 		(*this).n = B.n;
 	}
-	// std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
@@ -122,13 +122,13 @@ Set& Set::operator= (Set&& B) noexcept
 
 		B.A = nullptr;
 	}
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
 Set::Set(int len) : n(len), S('A' + cnt++) {
 	Generator(len, A);
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 void Set::Show() {
@@ -182,5 +182,5 @@ void Set::ZeroingCounter()
 	cnt = 0;
 }
 
-Set::~Set() { //std::cout << "DELETED " << *this << std::endl;
+Set::~Set() { std::cout << "DELETED " << *this << std::endl;
 	delete A; }

@@ -15,13 +15,13 @@ Set& Set::operator &=(const Set& B)
 		}
 	}
 	A[n] = 0;
-	// std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
+	std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator& (const Set& B)const
 {
-	// std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
+	 std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
 	Set C(*this);
 	return (C &= B);
 }
@@ -39,13 +39,13 @@ Set& Set::operator |=(const Set& B)
 		if (f) A[n++] = B.A[i];
 	}
 	A[n] = 0;
-	// std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
 	return *this;
 }
 
 Set Set::operator | (const Set & B) const
 {
-	// std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
+	std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
 	Set C(*this);
 	return (C |= B);
 }
@@ -69,7 +69,7 @@ Set Set::operator~ () const
 			C.A[C.n++] = c;
 	}
 	C.A[C.n] = 0;
-	// std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
+	 std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
 	return C;
 }
 
@@ -82,7 +82,7 @@ Set& Set::operator= (const Set& B)
 		while (*dst++ = *src++);
 		
 	}
-	// std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
@@ -95,7 +95,7 @@ Set& Set::operator= (Set&& B) noexcept
 		
 		B.A = nullptr;
 	}
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 
@@ -108,14 +108,14 @@ std::ostream& operator<< (std::ostream& os, Set& set) {
 #pragma endregion
 
 Set::~Set() {
-	// std::cout << "DELETED " << *this << std::endl;
+	 std::cout << "DELETED " << *this << std::endl;
 	delete[] A;
 }
 
 Set::Set() : n(0), S('A' + cnt++), A(new char[N + 1]) 
 { 
 	A[n] = 0;
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 Set::Set(char) : n(0), S('A' + cnt++), A(new char[N + 1])
@@ -125,7 +125,7 @@ Set::Set(char) : n(0), S('A' + cnt++), A(new char[N + 1])
 		if (rand() % 2) 
 			A[n++] = i + 'À';
 	A[n] = 0;
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 Set::Set(const Set& B) : S('A' + cnt++), A(new char[N + 1])
@@ -133,19 +133,19 @@ Set::Set(const Set& B) : S('A' + cnt++), A(new char[N + 1])
 	char* dst(A), *src(B.A);
 	while (*dst++ = *src++);
 	(*this).n = B.n;
-	// std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
 }
 
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 
 Set::Set(int len) : n(len), S('A' + cnt++), A(new char[N + 1])
 {
 	Generator(len, A);
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 
 void Set::Show()

@@ -133,6 +133,7 @@ Set::Set(const Set& B) : S('A' + cnt++), A(new bool[N])
 Set::Set(Set&& B) noexcept : S('A' + cnt++), n(B.n), A(B.A)
 {
 	B.A = nullptr;
+	B.n = 0;
 	std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 

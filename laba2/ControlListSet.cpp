@@ -16,7 +16,7 @@ Set::Set(int len) :
 	A(nullptr)
 {
 	Generator(n, A);
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 // конструктор — по умолчанию
 Set::Set() :
@@ -24,7 +24,7 @@ Set::Set() :
 	S('A' + cnt++),
 	A(nullptr)
 {
-	// std::cout << "CREATED " << *this << std::endl;
+	 std::cout << "CREATED " << *this << std::endl;
 }
 // конструктор копии
 Set::Set(const Set& B) :
@@ -35,7 +35,7 @@ Set::Set(const Set& B) :
 	for (ST* p = B.A; p; p = p->next) {
 		A = new ST(p->letter, A);
 	}
-	// std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
+	std::cout << "CREATED " << *this << " FROM " << B.S << std::endl;
 }
 // конструктор копирования с переносом
 Set::Set(Set&& B) noexcept :
@@ -44,17 +44,17 @@ Set::Set(Set&& B) noexcept :
 	A(B.A)
 {
 	B.A = nullptr;
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 }
 // деструктор множества
 Set::~Set() {
-	// std::cout << "DELETED " << *this << std::endl;
+	 std::cout << "DELETED " << *this << std::endl;
 	A->ST::~ST();
 }
 // присваивание
 Set& Set::operator=(const Set& B) {
 	if (this != &B) {
-		// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
+		 std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 		delete A;
 		A = nullptr;
 		n = B.n;
@@ -62,19 +62,19 @@ Set& Set::operator=(const Set& B) {
 			A = new ST(p->letter, A);
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 // присваивание с переносом
 Set& Set::operator=(Set&& B) noexcept {
 	if (this != &B) {
-		// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
+		 std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 		delete A;
 		n = B.n;
 		A = B.A;
 		B.A = nullptr;
 	}
-	// std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
+	 std::cout << "BECOMED " << *this << " FROM " << B.S << std::endl;
 	return *this;
 }
 // объединение с присваиванием
@@ -84,19 +84,19 @@ Set& Set:: operator|=(const Set& B) {
 			A = new ST(p->letter, A);
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
+	std::cout << "RECEIVED " << *this << " = " << S << " | " << B.S << std::endl;
 	return *this;
 }
 // объединение
 Set Set:: operator|(const Set& B) const {
-	// std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
+ std::cout << "CALCULATION " << S << " | " << B.S << std::endl;
 	Set C(*this);
 	return (C |= B);
 }
 // пересечение с присваиванием
 Set& Set::operator&=(const Set& B) {
 	Set C(*this);
-	// std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
+ std::cout << "DELETED LIST-SET {" << A << "} FROM " << S << " BUT NOT OBJECT" << std::endl;
 	delete A;
 	A = nullptr;
 	n = 0;
@@ -106,12 +106,12 @@ Set& Set::operator&=(const Set& B) {
 			++n;
 		}
 	}
-	// std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
+	 std::cout << "RECEIVED " << *this << " = " << C.S << " & " << B.S << std::endl;
 	return *this;
 }
 // пересечение
 Set Set::operator&(const Set& B) const {
-	// std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
+	 std::cout << "CALCULATION " << S << " & " << B.S << std::endl;
 	Set C(*this);
 	return (C &= B);
 }
@@ -123,7 +123,7 @@ Set Set::operator~() const {
 			C.A = new ST(c, C.A);
 		}
 	}
-	// std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
+	 std::cout << "RECEIVED " << C << " = ~" << S << std::endl;
 	return C;
 }
 

@@ -7,10 +7,10 @@
 #include <iomanip>
 #include <windows.h>
 using namespace std;
-// #include "Set.h"
-// #include "ListSet.h"
-// #include "ControlListSet.h"
-#include "BoolSet.h"
+ #include "Set.h"
+ //#include "ListSet.h"
+ //#include "ControlListSet.h"
+//#include "BoolSet.h"
 // #include "MachineWordSet.h"
 int
 Set::N = 32,
@@ -18,9 +18,9 @@ Set::cnt = 0;
 const long number_of_repeats = 100000;
 
 // только для класса-контролерра
-/* int ST::mup = 0,
-	ST::mup_spare = 0;
-	ST ST::list_memory[ST::max_mup]; */
+ //int ST::mup = 0,
+	//ST::mup_spare = 0;
+	//ST ST::list_memory[ST::max_mup]; 
 
 int main() {
 	SetConsoleCP(1251);
