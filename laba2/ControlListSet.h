@@ -58,7 +58,7 @@ static void MemoryOutput() {
 		<< std::endl;
 	for (int i = 0; i < ST::max_mup; ++i) {
 		if (!(i % 100) && i) std::cout << std::endl;
-		std::cout << ST::list_memory[i].element;
+		std::cout << ST::list_memory[i].letter;
 	}
 	std::cout << std::endl;
 }
